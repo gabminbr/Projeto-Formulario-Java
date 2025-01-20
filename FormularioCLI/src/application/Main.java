@@ -1,5 +1,6 @@
 package application;
 
+import entities.GerenciadorUsuario;
 import entities.Usuario;
 
 import java.io.*;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        File file = new File("questionario.txt");
+        File file = new File("C:\\Users\\gabmi\\IdeaProjects\\Projeto-Formulario-Java\\FormularioCLI\\questionario.txt");
         List<String> questions = new ArrayList<>();
         List<String> answers = new ArrayList<>();
 
@@ -24,30 +25,21 @@ public class Main {
             e.printStackTrace();
         }
 
-        for(String qst : questions) {
-            System.out.print(qst + " ");
+        for(String s : questions){
+            System.out.println(s + " ");
             answers.add(sc.nextLine());
         }
 
-        Usuario user = new Usuario(answers.get(0), answers.get(1), Integer.valueOf(answers.get(2)), Double.valueOf(answers.get(3)));
-        System.out.println(user);
+        String userName = answers.get(0);
+        String userEmail = answers.get(1);
+        Integer userAge = Integer.valueOf(answers.get(2));
+        Double userHeight = Double.valueOf(answers.get(3));
+        int userId = 1;
 
-        String pathname = answers.get(0).replace(" ", "").toUpperCase() + ".txt";
-        File user1 = new File(pathname);
-        try{
-            user1.createNewFile();
-        } catch(IOException e){
-            e.printStackTrace();
-        }
+        Usuario usuario = new Usuario(userName, userEmail, userAge, userHeight, userId);
+        GerenciadorUsuario userGerenc = new GerenciadorUsuario();
+        userGerenc.cadastrarUsuario(usuario, answers);
 
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(user1))){
-            for(String s: answers){
-                bw.write(s);
-                bw.newLine();
-            }
-            bw.flush();
-        } catch(IOException e){
-            e.printStackTrace();
-        }
+
     }
 }
