@@ -14,13 +14,13 @@ public class GerenciadorUsuario {
         usuarios = new ArrayList<>();
     }
 
-    public void cadastrarUsuario(Usuario user, List<String> ans){
+    public void cadastrarUsuario(Usuario user, List<String> ans, int id){
         usuarios.add(user);
-        salvarUsuarioArquivo(user, ans);
+        salvarUsuarioArquivo(user, ans, id);
     }
 
-    public void salvarUsuarioArquivo(Usuario user, List<String> ans){
-        String path = user.getId() + "-" + user.getName().replace(" ", "").toUpperCase() + ".txt";
+    public void salvarUsuarioArquivo(Usuario user, List<String> ans, int id){
+        String path = id + " - " + user.getName().replace(" ", "").toUpperCase() + ".txt";
         File file = new File(path);
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))){
             for(String answer : ans){
