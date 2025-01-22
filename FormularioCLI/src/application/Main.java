@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        File file = new File("C:\\Users\\gabmi\\IdeaProjects\\Projeto-Formulario-Java\\FormularioCLI\\questionario.txt");
+        File file = new File("questionario.txt");
         List<String> questions = new ArrayList<>();
         List<String> answers = new ArrayList<>();
 
@@ -54,6 +54,10 @@ public class Main {
                     MenuOptions.opt3(file, numberQuestion);
                     numberQuestion++;
                     break;
+                case 4:
+                    MenuOptions.opt4(file);
+                case 5:
+
                 case 6:
                     System.out.println("Encerrando o programa...");
                     break;

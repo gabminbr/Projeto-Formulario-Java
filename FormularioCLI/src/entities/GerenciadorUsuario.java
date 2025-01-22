@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GerenciadorUsuario {
-    private List<Usuario> usuarios;
+    private List<Usuario> usuarios = new ArrayList<>();
 
     public GerenciadorUsuario(){
-        usuarios = new ArrayList<>();
     }
 
     public void cadastrarUsuario(Usuario user, List<String> ans, int id){
