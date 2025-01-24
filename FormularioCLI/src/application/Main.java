@@ -12,9 +12,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        File file = new File("questionario.txt");
+        String basePath = System.getProperty("user.dir");
+        String caminhoArquivo = basePath + File.separator + "FormularioCLI" + File.separator +  "resources" + File.separator + "questionario.txt";
+        File file = new File(caminhoArquivo);
         List<String> questions = new ArrayList<>();
-        List<String> answers = new ArrayList<>();
 
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
             String line = br.readLine();
@@ -26,26 +27,26 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println("1 - Cadastrar Usuário");
-        System.out.println("2 - Listar todos usuários cadastrados");
-        System.out.println("3 - Cadastrar nova pergunta no formulário");
-        System.out.println("4 - Deletar pergunta do formulário");
-        System.out.println("5 - Pesquisar usuário por nome, idade ou email");
-        System.out.println("6 - Encerrar");
-        System.out.println();
-
         int menuAns;
         int idUser = 0;
         int numberQuestion = 5;
 
         do {
+            System.out.println("1 - Cadastrar Usuário");
+            System.out.println("2 - Listar todos usuários cadastrados");
+            System.out.println("3 - Cadastrar nova pergunta no formulário");
+            System.out.println("4 - Deletar pergunta do formulário");
+            System.out.println("5 - Pesquisar usuário por nome");
+            System.out.println("6 - Encerrar");
+            System.out.println();
+
             System.out.print("Opção desejada: ");
             menuAns = Integer.parseInt(sc.nextLine());
+
             switch (menuAns) {
                 case 1:
                     idUser++;
-                    MenuOptions.opt1(questions, answers, idUser);
-                    answers.clear();
+                    MenuOptions.opt1(questions, idUser);
                     break;
                 case 2:
                     MenuOptions.opt2();
@@ -57,7 +58,8 @@ public class Main {
                 case 4:
                     MenuOptions.opt4(file);
                 case 5:
-
+                    MenuOptions.opt5();
+                    break;
                 case 6:
                     System.out.println("Encerrando o programa...");
                     break;

@@ -42,6 +42,6 @@ public class Usuario {
         return String.format("%s\n" +
                 "%s\n" +
                 "%s\n" +
-                "%.2s", getName(), getEmail(), getAge(), getHeight());
+                "%s", getName(), getEmail(), getAge(), getHeight());
     }
 }

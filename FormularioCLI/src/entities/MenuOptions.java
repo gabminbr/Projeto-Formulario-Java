@@ -1,5 +1,7 @@
 package entities;
 
+import exceptions.NotAllowedInfoException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +11,33 @@ public class MenuOptions {
     static GerenciadorUsuario gerenciador = new GerenciadorUsuario();
     static Scanner sc = new Scanner(System.in);
 
-    public static void opt1(List<String> qst, List<String> ans, int id){
+    public static void opt1(List<String> qst, int id){
+        List<String> ans = new ArrayList<>();
         for (String s : qst) {
-            System.out.println(s + " ");
+            System.out.print(s + " ");
             ans.add(sc.nextLine());
         }
 
-        Usuario user = new Usuario(ans.get(0), ans.get(1), ans.get(2), ans.get(3), id);
+        //validar as informações de acordo com as regras de comércio
+        try{
+            gerenciador.validarInformacoes(ans);
+        } catch(NumberFormatException n){
+            System.out.println("Por favor, insira valores válidos para idade ou altura!");
+            return;
+        } catch(NotAllowedInfoException e){
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        String name = ans.get(0);
+        String email = ans.get(1);
+        String age = ans.get(2);
+        String height = ans.get(3);
+
+        Usuario user = new Usuario(name, email, age, height, id);
         gerenciador.cadastrarUsuario(user, ans, id);
+        System.out.println();
+        System.out.println(user);
     }
 
     public static void opt2(){
@@ -76,5 +97,11 @@ public class MenuOptions {
 
             System.out.println("o arquivo de questionário foi modificado!");
         }
+    }
+
+    public static void opt5(){
+        System.out.print("Digite o nome ou parte do nome: ");
+        String buscaNome = sc.nextLine();
+        gerenciador.acessarUsuarios(buscaNome);
     }
 }
